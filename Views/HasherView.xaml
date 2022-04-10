@@ -1,0 +1,36 @@
+﻿<Window x:Class="SimpleOneWayHashing.Views.HasherView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:SimpleOneWayHashing.ViewModels"
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding HashingTitle}" Height="653.5" Width="803.5">
+    <Grid Background="#333333">
+        <StackPanel Orientation="Vertical" Margin="10,10,10,0" Height="349" VerticalAlignment="Top">
+            <TextBlock Text="Lockr" HorizontalAlignment="Center" FontSize="20" Foreground="#ffffff"/>
+            <TextBlock Text="Enter your plain password:" Foreground="#ffffff" FontSize="16"/>
+            <TextBox x:Name="PlainText" Height="Auto" HorizontalAlignment="Stretch" Text="{Binding PlainText, UpdateSourceTrigger=PropertyChanged}" Background="#666666" Foreground="#ffffff" Margin="0,0,482,0"/>
+            <TextBlock Text="Enter your password salt:" Margin="0,10,0,0" Foreground="#ffffff" FontSize="16"/>
+            <TextBlock Text="Hashed String:" Margin="360,10,241,0" Foreground="#ffffff" Height="27" RenderTransformOrigin="0.5,0.5" FontSize="16">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.049"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBox x:Name="Salt" Height="Auto" HorizontalAlignment="Stretch" Text="{Binding Salt, UpdateSourceTrigger=PropertyChanged}" Background="#666666" Foreground="#ffffff" Margin="0,0,482,0" />
+            <TextBox x:Name="HashedString" Height="53" Text="{Binding ComputedHash, Mode=OneWay}" IsReadOnly="True" Margin="372,0,0,0"/>
+            <ListBox x:Name="xlist" Height="157" Background="#aaaaaa" SelectionChanged="xlist_SelectionChanged" Margin="372,0,0,0"/>
+            <Grid Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="xGetHash" Content="Get Hash" Grid.Column="0" Command="{Binding Path=ComputeHashCommand}" Click="xGetHash_Click" Background="#666666" Margin="0,-183,225,183"/>
+                <Button Content="Clear TextBox" Command="{Binding Path=ClearTextBoxCommand}" Margin="163,-183,68,183"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
